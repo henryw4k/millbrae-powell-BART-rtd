@@ -42,6 +42,8 @@ function googleDistanceMatrix(origin, destination, cb){
 }
 
 
+
+
 //return string of closest abbreviated bart station.
 function closestBartStation(currentLat, currentLng){ //passing in current location
 
@@ -59,6 +61,9 @@ function closestBartStation(currentLat, currentLng){ //passing in current locati
 		if (!closest || closestDist > distance){
 			closest = bartstation[key]['abbr'];
 			closestDist = distance;
+		}else {
+			//logic
+			continue;
 		}
 	}
 
