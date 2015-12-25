@@ -50,20 +50,36 @@ function closestBartStation(currentLat, currentLng){ //passing in current locati
 	var _currentLat = parseInt(currentLat);
 	var _currentLng	= parseInt(currentLng);
 
-	var closest, closestDist = null;
+	var closest, 
+	    closestDist = null;
+
+	var _originArray = [];
+	var _bartDistanceArray = [];
+
+	for(var i = 0; i < 45; i++){
+		_originArray.push(new google.maps.LatLng(_currentLat, _currentLng));
+	}
+
+	for(var key in bartstation){
+		_bartDistanceArray.push( new google.maps.LatLng( bartstation[key][gtfs_latitude], bartstation[key][gtfs_longitude] ));
+	}
+
+	console.log('originArray: ', _originArray);
+	console.log('_bartDistanceArray: ', _bartDistanceArray);
 
 	//bartstation from bartstation.js
+	//pass in array into googleDistance Matrix and find the closest one.
 	for( var key in bartstation ){
 		var distance = 
-		haversine(_currentLat, _currentLng, bartstation[key]['gtfs_latitude'], bartstation[key]['gtfs_longitude']);
-		
+			// haversine(_currentLat, _currentLng, bartstation[key]['gtfs_latitude'], bartstation[key]['gtfs_longitude']);
+			
+
+			var _destination = new google.maps.LatLng(37.7894069, -122.40106730000002); //bart location
+			googleDistanceMatrix(_origin, [_destination], cb);
 
 		if (!closest || closestDist > distance){
 			closest = bartstation[key]['abbr'];
 			closestDist = distance;
-		}else {
-			//logic
-			continue;
 		}
 	}
 
@@ -71,14 +87,14 @@ function closestBartStation(currentLat, currentLng){ //passing in current locati
 }
 
 //wikipedia haversine for calculating gps coordinates. 
-function haversine() {
-	var radians = Array.prototype.map.call(arguments, function(deg) { return deg/180.0 * Math.PI; });
-	var lat1 = radians[0], lon1 = radians[1], lat2 = radians[2], lon2 = radians[3];
-  var R = 6372.8; // km
-  var dLat = lat2 - lat1;
-  var dLon = lon2 - lon1;
-  var a = Math.sin(dLat / 2) * Math.sin(dLat /2) + Math.sin(dLon / 2) * Math.sin(dLon /2) * Math.cos(lat1) * Math.cos(lat2);
-  var c = 2 * Math.asin(Math.sqrt(a));
-  return R * c;
-}
+// function haversine() {
+// 	var radians = Array.prototype.map.call(arguments, function(deg) { return deg/180.0 * Math.PI; });
+// 	var lat1 = radians[0], lon1 = radians[1], lat2 = radians[2], lon2 = radians[3];
+//   var R = 6372.8; // km
+//   var dLat = lat2 - lat1;
+//   var dLon = lon2 - lon1;
+//   var a = Math.sin(dLat / 2) * Math.sin(dLat /2) + Math.sin(dLon / 2) * Math.sin(dLon /2) * Math.cos(lat1) * Math.cos(lat2);
+//   var c = 2 * Math.asin(Math.sqrt(a));
+//   return R * c;
+// }
 //console.log(haversine(36.12, -86.67, 33.94, -118.40));

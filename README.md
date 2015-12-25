@@ -21,3 +21,16 @@ the link above.
 6. Check the Developer mode on the top-right, and click Load unpacked extension.
 7. Select the folder that you cloned or downloaded on the pop-up screen.
 8. Use the extension!
+
+
+
+
+
+
+# NEW FEATURES 
+1. determine which bart station is closes to you. 	
+	a. walk time to the closest bart station
+
+2. lets you choose a new location to get off bart. 
+
+

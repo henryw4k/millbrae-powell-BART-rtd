@@ -140,13 +140,13 @@ $(function() {
 
   //initialized calls
   getLocation(function(location){
-    console.log(closestBartStation(location['lat'], location['lng']));
+    console.log(closestBartStation(location['lat'], location['lng']));//should print closest bart stations
   });
 
   // events handler
   $('#distanceBtn').on('click', function(){
       getLocation(function(location){
-        getDiffDistance(location, function(diff){
+        getDiffDistance(location, function(diff){//difference called here. 
             $('#distanceBtn').replaceWith( '<div id="distance"> Walk Time: '+ diff.duration.text +'</div>');
         });
       });
